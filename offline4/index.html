@@ -1,0 +1,176 @@
+<html>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta charset="UTF-8"> 
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <title>Welcome</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+ 
+ <link rel="apple-touch-icon" href="https://cdn.glitch.com/49d34dc6-8fbd-46bb-8221-b99ffd36f1af%2Ftouchicon-180.png?v=1566411949736">
+ <link href="logo2.png" sizes="512x512" rel="apple-touch-startup-image" />
+ <script>
+     if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('sw.js');
+  });
+}
+ </script>
+ 
+<link rel="manifest" href="mainfest.json" />
+    </head>
+    <body>
+        
+
+        <p id="html.net"> </p>
+        <form>
+        
+
+        Validation Code: <input type="text" name="code" id="code" placeholder="code"> <br>
+        Number: <input type="text" name="number" id="number" placeholder="Number">
+        <input id="submit" type="button" class="btn-submit" value="Submit" name="submit"  >
+        </form>
+
+        
+        <script>
+            
+            var latitude;
+            $(document).ready(function() {
+            
+            $("#submit").click(function(){
+              var reed="bad";
+            var agree=confirm("Are you sure you wish to continue?");
+            if (agree)
+            {var agree=confirm("Are you sure you wish to continue?");
+             if (agree){
+             var agree=confirm("Are you sure you wish to continue?");
+             if (agree){
+               reed="good";
+               alert("step 0");  
+             
+             alert("step01");
+              
+            
+            var code = $("#code").val();
+            var number = $("#number").val();
+            alert("step1");
+      //start here
+      (() => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+    } else {
+        alert("Geolocation is not supported by this browser");
+    }    
+})();
+function success(position) {
+  var latitude = position.coords.latitude;
+  var longitude =position.coords.longitude;
+  //alert (window.latitude);
+  if(number==''||code=='') {
+            alert("Please fill all fields.");
+            return false;
+            }
+            
+            if (navigator.onLine) {
+                //alert (latitude);
+            
+            $.ajax({
+            type: "POST",
+            url: "submit.php",
+            data: {
+            code: code,
+            latitude,
+            longitude,
+            
+            
+            number: number
+            },
+            cache: false,
+            success: function(data) {
+            alert(data);
+            //alert("Submitted!");
+            },
+            error: function(xhr, status, error) {
+            console.error(xhr);
+            }
+            });
+            
+            }
+           else {
+               localStorage.setItem("code", code);
+               localStorage.setItem("number", number);
+               var Lcode=localStorage.code;
+               var Lnumber=localStorage.number;
+               var Llatitude=localStorage.latitude;
+               var Llongitude=localStorage.longitude;
+               alert(Lcode);
+               window.ononline = (event) => {
+             alert("You are now connected to the network.");
+             $.ajax({
+            type: "POST",
+            url: "submit.php",
+            data: {
+                code: code,
+                latitude,
+                longitude,
+            number: number
+            },
+            cache: false,
+            success: function(data) {
+            alert(data);
+            alert("Submitted!");
+            },
+            error: function(xhr, status, error) {
+            console.error(xhr);
+            }
+                 });
+               
+               };
+           }
+}
+function error() {
+  alert("Unable to retrieve location");
+}
+            //alert (longitude);
+            
+          }
+             else return false;
+             }
+             else return false;
+            }
+            else return false ;
+            }
+            
+            
+            );
+            
+            });
+           
+            </script>
+
+
+   
+    <div class="sub_div"> 
+<div class="popup" onclick="myFunction()">
+  <span class="popuptext" onclick="myFunction()" id="myPopup"> <img src="tip.png"/></span>
+</div>
+    </div>
+  <script>
+    
+      // Detects if device is on iOS 
+const isIos = () => {
+  const userAgent = window.navigator.userAgent.toLowerCase();
+  return /iphone|ipad|ipod/.test( userAgent );
+}
+// Detects if device is in standalone mode
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+// Checks if should display install popup notification:
+if (isIos() && !isInStandaloneMode()) {
+    myFunction();
+}
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+  </script></body>
+</html>
